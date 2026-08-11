@@ -195,9 +195,19 @@ below).
 
 ## Deliverables
 
-- Repository: *(this repo)*
-- Deployed Cloud Run URL: *(fill in after running `infra/deploy.sh` or
-  Terraform against a real GCP project — see "Deploy to GCP" above)*
+- Repository: https://github.com/aprotiim/IT_Triage-Assistant
+- Deployed orchestrator (public): https://it-triage-orchestrator-y6jkazwmuq-uc.a.run.app
+  - Try it: `POST /apps/it_triage_orchestrator/users/<user>/sessions/<session>`
+    with `{}` to create a session, then `POST /run` — see "Local development"
+    above for the request shape, or `GET /list-apps` / `GET /health` as a
+    quick liveness check.
+- MCP server (private, IAM-only, not directly callable): https://it-triage-mcp-server-y6jkazwmuq-uc.a.run.app
+  — only the orchestrator's service account can invoke it, by design (see
+  "Known limitations" above for the public-vs-private tradeoff on the
+  orchestrator itself).
+- Uptime: staying up for **1 week** from submission for review, then torn
+  down (`gcloud run services delete` on both services). Let us know if you
+  need it longer.
 - Loom walkthrough: *(link — single-domain + multi-domain fan-out demo)*
 - Architecture diagram: [`docs/architecture.md`](docs/architecture.md)
   (Mermaid, renders directly on GitHub — a pragmatic substitute for a
